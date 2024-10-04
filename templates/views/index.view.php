@@ -56,7 +56,7 @@ require_once __DIR__ . '/inicio.part.php';
 				<!-- First Category pictures -->
 				<div id="category1" class="tab-pane active">
 					<div class="row popup-gallery">
-						<?=
+						<?php
 						$idCategoria = 1;
 						shuffle($imagenesHome);
 						require_once __DIR__ . '/imagen-index.part.php';
@@ -66,9 +66,9 @@ require_once __DIR__ . '/inicio.part.php';
 				<!-- End of First category pictures -->
 
 				<!--second category pictures -->
-				<div id="" class="tab-pane">
+				<div id="category2" class="tab-pane">
 					<div class="row popup-gallery">
-						<?=
+						<?php
 						$idCategoria = 2;
 						shuffle($imagenesHome);
 						require_once __DIR__ . '/imagen-index.part.php';
@@ -80,7 +80,7 @@ require_once __DIR__ . '/inicio.part.php';
 				<!-- Third Category Pictures -->
 				<div id="category3" class="tab-pane">
 					<div class="row popup-gallery">
-						<?=
+						<?php
 						$idCategoria = 3;
 						shuffle($imagenesHome);
 						require_once __DIR__ . '/imagen-index.part.php';
