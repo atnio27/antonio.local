@@ -14,9 +14,9 @@ class Imagen
 	private $numDownloads;
 
 	public function __construct(
-		string $nombre,
-		string $descripcion,
-		string $categoria,
+		string $nombre = "",
+		string $descripcion = "",
+		string $categoria = "",
 		int $numVisualizaciones = 0,
 		int $numLikes = 0,
 		int $numDownloads = 0
@@ -109,12 +109,12 @@ class Imagen
 
 	public function getUrlPortfolio(): string
 	{
-		return self::RUTA_IMAGENES_PORTFOLIO . $this->nombre;
+		return self::RUTA_IMAGENES_PORTFOLIO . $this->getNombre();
 	}
 
 	public function getUrlGaleria(): string
 	{
-		return self::RUTA_IMAGENES_GALERIA . $this->nombre;
+		return self::RUTA_IMAGENES_GALERIA . $this->getNombre();
 	}
 
 	public function getUrlClientes(): string
