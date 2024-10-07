@@ -22,6 +22,11 @@ require_once __DIR__ . '/../../src/utils/utils.class.php';
 				else echo '<li class=”0lien”>'; ?>
 				<a href="index.php"><i class="fa fa-home sr-icons"></i> Home</a>
 				</li>
+				<?php if (Utils::esOpcionMenuActiva('/galeria.php') == true)
+					echo '<li class="active lien">';
+				else echo '<li class=”0lien”>'; ?>
+				<a href="galeria.php"><i class="fa fa-star sr-icons"></i> Galería</a>
+				</li>
 				<?php if (Utils::esOpcionMenuActiva('/about.php') == true)
 					echo '<li class="active lien">';
 				else echo '<li class=”0lien”>'; ?>
