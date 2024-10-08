@@ -120,24 +120,7 @@ require_once __DIR__ . '/inicio.part.php';
 					<h4>Our Main Partners</h4>
 					<hr />
 					<div class="text-muted text-left">
-						<ul class="list-inline">
-							<li>
-								<img src="/public/images/index/log2.jpg" alt="logo" />
-							</li>
-							<li>First Partner Name</li>
-						</ul>
-						<ul class="list-inline">
-							<li>
-								<img src="/public/images/index/log1.jpg" alt="logo" />
-							</li>
-							<li>Second Partner Name</li>
-						</ul>
-						<ul class="list-inline">
-							<li>
-								<img src="/public/images/index/log3.jpg" alt="logo" />
-							</li>
-							<li>Third Partner Name</li>
-						</ul>
+						<?php require_once __DIR__ . '/indexlogos.view.part.php'; ?>
 					</div>
 				</div>
 			</div>

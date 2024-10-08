@@ -120,6 +120,6 @@ class Imagen
 
 	public function getUrlClientes(): string
 	{
-		return self::RUTA_IMAGENES_CLIENTES . $this->nombre;
+		return self::RUTA_IMAGENES_CLIENTES . $this->getNombre();
 	}
 }
