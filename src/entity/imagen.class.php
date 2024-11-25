@@ -1,11 +1,17 @@
 <?php
-class Imagen
+
+require_once __DIR__ . '/../entity/IEntity.php';
+
+class Imagen implements IEntity
 {
 	const RUTA_IMAGENES_PORTFOLIO = '/public/images/index/portfolio/';
 	const RUTA_IMAGENES_GALERIA = '/public/images/index/gallery/';
 	const RUTA_IMAGENES_CLIENTES = '/public/images/clients/';
 	const RUTA_IMAGENES_SUBIDAS = '/public/images/galeria/';
 
+	/**
+	 * @var string
+	 */
 	private $id;
 	private $nombre;
 	private $descripcion;
@@ -17,11 +23,13 @@ class Imagen
 	public function __construct(
 		string $nombre = "",
 		string $descripcion = "",
-		string $categoria = "",
+		string $categoria = "1",
 		int $numVisualizaciones = 0,
 		int $numLikes = 0,
-		int $numDownloads = 0
+		int $numDownloads = 0,
 	) {
+		$this->id = null;
+
 		$this->nombre = $nombre;
 		$this->descripcion = $descripcion;
 		$this->categoria = $categoria;
@@ -30,8 +38,21 @@ class Imagen
 		$this->numDownloads = $numDownloads;
 	}
 
+	public function toArray(): array
+	{
+		return [
+			'id' => $this->getId(),
+			'nombre' => $this->getNombre(),
+			'descripcion' => $this->getDescripcion(),
+			'numVisualizaciones' => $this->getNumVisualizaciones(),
+			'numLikes' => $this->getNumLikes(),
+			'numDownloads' => $this->getNumDownloads(),
+			'categoria' => $this->getCategoria()
+		];
+	}
+
 	// Getters
-	public function getId(): int
+	public function getId()
 	{
 		return $this->id;
 	}
@@ -116,6 +137,10 @@ class Imagen
 	public function getUrlGaleria(): string
 	{
 		return self::RUTA_IMAGENES_GALERIA . $this->getNombre();
+	}
+	public function getUrlSubidas(): string
+	{
+		return self::RUTA_IMAGENES_SUBIDAS . $this->getNombre();
 	}
 
 	public function getUrlClientes(): string

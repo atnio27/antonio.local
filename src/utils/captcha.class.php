@@ -26,9 +26,9 @@ $colorNegro = imagecolorallocate($imagen, 0, 0, 0);
 imagefill($imagen, 0, 0, $colorAzul);
 $backgroundColor = imagecolorallocate($imagen, 255, 255, 255);
 for ($contadorLineas = 0; $contadorLineas < $randomLineas; $contadorLineas++) {
-	imageline($imagen, rand(0, $ancho), rand(0, $alto), rand(0, $ancho), rand(0, $alto + 20), $colorNegro);
+	imageline($imagen, rand(0, $ancho), rand(0, $alto), rand(0, $ancho), rand(0, $alto + 20), $colorBlanco);
 }
-imagettftext($imagen, $captchaFontSize, 0, 4, $alto, $colorNegro, $captchaFont, $captcha);
+imagettftext($imagen, $captchaFontSize, 0, 4, $alto, $colorBlanco, $captchaFont, $captcha);
 imagepng($imagen);
 imagedestroy($imagen);
 $_SESSION['captchaGenerado'] = $captcha;

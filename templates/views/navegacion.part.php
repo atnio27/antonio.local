@@ -45,6 +45,13 @@ require_once __DIR__ . '/../../src/utils/utils.class.php';
 				<a href="contact.php"><i class="fa fa-phone-square sr-icons"></i>
 					Contact</a>
 				</li>
+				</li>
+				<?php if (Utils::esOpcionMenuActiva('/asociados.php') == true)
+					echo '<li class="active lien">';
+				else echo '<li class=”0lien”>'; ?>
+				<a href="asociados.php"><i class="fa fa-bookmark sr-icons"></i>
+					Asociados</a>
+				</li>
 			</ul>
 		</div>
 	</div>
