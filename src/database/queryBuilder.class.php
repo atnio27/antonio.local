@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../exceptions/queryException.class.php';
 require_once __DIR__ . '/../entity/imagen.class.php';
 require_once __DIR__ . '/../entity/categoria.class.php';
-// require_once __DIR__ . '/../exceptions/categoriaException.class.php';
+// require_once __DIR__ . '/../../app/repository/categoriasRepository.class.php';
 
 class QueryBuilder
 {
@@ -92,5 +92,44 @@ class QueryBuilder
 		PDO::FETCH_PROPS_LATE hace que se llame al constructor de la clase antes que se asignen los
 		valores. */
 		return $pdoStatement->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $this->classEntity);
+	}
+
+	public function executeTransaction(callable $fnExecuteQuerys)
+	{
+		try {
+			$this->connection->beginTransaction();
+			$fnExecuteQuerys(); // LLamamos a todas las consultas SQL de la transacción
+			$this->connection->commit();
+		} catch (PDOException $pdoException) {
+			$this->connection->rollBack(); // Se deshacen todos los cambios desde beginTransaction()
+			throw new QueryException("No se ha podido realizar la operación.");
+		}
+	}
+
+	public function getUpdates(array $parameters)
+	{
+		$updates = '';
+		foreach ($parameters as $key => $value) {
+			if ($key !== 'id')
+				if ($updates !== '')
+					$updates .= ", ";
+			$updates .= $key . '=:' . $key;
+		}
+		return $updates;
+	}
+	public function update(IEntity $entity): void
+	{
+		try {
+			$parameters = $entity->toArray();
+			$sql = sprintf(
+				'UPDATE %s SET %s WHERE id=:id',
+				$this->table,
+				$this->getUpdates($parameters)
+			);
+			$statement = $this->connection->prepare($sql);
+			$statement->execute($parameters);
+		} catch (PDOException $pdoException) {
+			throw new QueryException("No se ha podido actualizar el elemento con id " . $parameters['id']);
+		}
 	}
 }

@@ -5,7 +5,7 @@ require_once __DIR__ . '/../src/entity/imagen.class.php';
 require_once __DIR__ . '/../src/database/connection.class.php';
 require_once __DIR__ . '/../src/database/queryBuilder.class.php';
 require_once __DIR__ . '/../app/repository/imagenesRepository.class.php';
-require_once __DIR__ . '/../app/repository/categoriaRepository.class.php';
+require_once __DIR__ . '/../app/repository/categoriasRepository.class.php';
 
 
 // $errores = [];
@@ -82,7 +82,7 @@ try {
 	//$queryBuilder = new QueryBuilder('imagenes', 'Imagen');
 	$imagenesRepository = new ImagenesRepository();
 
-	$categoriaRepository = new CategoriaRepository();
+	$categoriaRepository = new CategoriasRepository();
 	$categorias = $categoriaRepository->findAll();
 
 
@@ -104,8 +104,9 @@ try {
 		$imagen = new File('imagen', $tiposAceptados); // El nombre 'imagen' es el que se ha puesto en elformulario de galeria.view.php
 		$imagen->saveUploadFile(Imagen::RUTA_IMAGENES_SUBIDAS);
 		$imagenGaleria = new Imagen($imagen->getFileName(), $descripcion, $categoria);
-		//$queryBuilder->save($imagenGaleria);
-		$imagenesRepository->save($imagenGaleria);
+		// $queryBuilder->save($imagenGaleria);
+		$imagenesRepository->guarda($imagenGaleria);
+
 
 
 
@@ -116,7 +117,7 @@ try {
 } catch (FileException $fileException) {
 	$errores[] = $fileException->getMessage();
 } catch (QueryException $queryException) {
-	$errores[] = $fileException->getMessage();
+	$errores[] = $queryException->getMessage();
 } catch (AppException $appException) {
 	$errores[] = $appException->getMessage();
 } catch (CategoriaException) {

@@ -69,7 +69,7 @@ class File
 			$ruta = $rutaDestino . $this->fileName;
 		}
 		if (
-			move_uploaded_file($this->file['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/' . $ruta) ===
+			move_uploaded_file($this->file['tmp_name'], $_SERVER['DOCUMENT_ROOT']  . $ruta) ===
 			false
 		)
 			throw new FileException('No se puede mover el archivo a su destino');

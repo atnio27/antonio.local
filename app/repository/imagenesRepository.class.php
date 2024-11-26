@@ -19,7 +19,18 @@ class ImagenesRepository extends QueryBuilder
 	 */
 	public function getCategoria(Imagen $imagenGaleria): Categoria
 	{
-		$categoriaRepository = new CategoriaRepository();
+		$categoriaRepository = new CategoriasRepository();
 		return $categoriaRepository->find($imagenGaleria->getCategoria());
+	}
+
+	public function guarda(Imagen $imagenGaleria)
+	{
+		$fnGuardaImagen = function () use ($imagenGaleria) { // Creamos una función anónima que se llama como callable
+			$categoria = $this->getCategoria($imagenGaleria);
+			$categoriaRepository = new CategoriasRepository();
+			$categoriaRepository->nuevaImagen($categoria);
+			$this->save($imagenGaleria);
+		};
+		$this->executeTransaction($fnGuardaImagen); // Se pasa un callable
 	}
 }
