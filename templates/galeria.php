@@ -1,9 +1,9 @@
 <?php
-require_once __DIR__ . '/../src/exceptions/fileException.class.php';
-require_once __DIR__ . '/../src/utils/file.class.php';
-require_once __DIR__ . '/../src/entity/imagen.class.php';
-require_once __DIR__ . '/../src/database/connection.class.php';
-require_once __DIR__ . '/../src/database/queryBuilder.class.php';
+require_once __DIR__ . '/../public/src/exceptions/fileException.class.php';
+require_once __DIR__ . '/../public/src/utils/file.class.php';
+require_once __DIR__ . '/../public/src/entity/imagen.class.php';
+require_once __DIR__ . '/../public/src/database/connection.class.php';
+require_once __DIR__ . '/../public/src/database/queryBuilder.class.php';
 require_once __DIR__ . '/../app/repository/imagenesRepository.class.php';
 require_once __DIR__ . '/../app/repository/categoriasRepository.class.php';
 

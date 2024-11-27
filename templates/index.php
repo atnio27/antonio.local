@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../src/entity/imagen.class.php';
-require_once __DIR__ . '/../src/entity/asociado.class.php';
+require_once __DIR__ . '/../public/src/entity/imagen.class.php';
+require_once __DIR__ . '/../public/src/entity/asociado.class.php';
 
 $imagenesHome = [];
 for ($i = 1; $i <= 12; $i++) {

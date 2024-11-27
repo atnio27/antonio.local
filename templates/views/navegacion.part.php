@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../src/utils/utils.class.php';
+require_once __DIR__ . '/../../public/src/utils/utils.class.php';
 ?>
 
 <nav class="navbar navbar-fixed-top navbar-default">

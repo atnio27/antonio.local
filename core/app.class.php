@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../src/exceptions/appException.class.php';
-require_once __DIR__ . '/../src//database/connection.class.php';
+require_once __DIR__ . '/../public/src/exceptions/appException.class.php';
+require_once __DIR__ . '/../public/src/database/connection.class.php';
 class App
 {
 	/**

@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__ . '/../src/entity/asociado.class.php';
-require_once __DIR__ . '/../src/utils/file.class.php';
-require_once __DIR__ . '/../src/utils/utils.class.php';
-require_once __DIR__ . '/../src/database/connection.class.php';
+require_once __DIR__ . '/../public/src/entity/asociado.class.php';
+require_once __DIR__ . '/../public/src/utils/file.class.php';
+require_once __DIR__ . '/../public/src/utils/utils.class.php';
+require_once __DIR__ . '/../public/src/database/connection.class.php';
 session_start();
 
 $mensaje = '';
@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			$file = new File('logo', ['image/jpeg', 'image/png', 'image/gif']);
 			$logo = $file->getFileName();
 			$file->saveUploadFile($_SERVER['DOCUMENT_ROOT'] . '/public/images/asociados/');
+
 
 			$asociado = new Asociado($nombre, $logo, $descripcion);
 
