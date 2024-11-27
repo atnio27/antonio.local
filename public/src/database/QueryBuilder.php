@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../exceptions/queryException.class.php';
-require_once __DIR__ . '/../entity/imagen.class.php';
-require_once __DIR__ . '/../entity/categoria.class.php';
+require_once __DIR__ . '/../entity/Imagen.php';
+require_once __DIR__ . '/../entity/Categoria.php';
 // require_once __DIR__ . '/../../app/repository/categoriasRepository.class.php';
 
 class QueryBuilder

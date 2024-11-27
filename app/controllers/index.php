@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../public/src/entity/imagen.class.php';
-require_once __DIR__ . '/../public/src/entity/asociado.class.php';
+require_once __DIR__ . '/../../public/src/entity/Imagen.php';
+require_once __DIR__ . '/../../public/src/entity/Asociado.php';
 
 $imagenesHome = [];
 for ($i = 1; $i <= 12; $i++) {
@@ -15,4 +15,4 @@ $asociados = [
 	new Asociado("Asociado 5", "log3.jpg", "Descripción del logo 3"),
 ];
 
-require_once __DIR__ . '/views/index.view.php';
+require_once __DIR__ . '/../views/index.view.php';

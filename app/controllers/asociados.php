@@ -45,4 +45,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	}
 }
 
-require_once __DIR__ . '/views/Asociados.view.php';
+require_once __DIR__ . '../views/Asociados.view.php';

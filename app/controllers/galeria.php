@@ -1,11 +1,11 @@
 <?php
-require_once __DIR__ . '/../public/src/exceptions/fileException.class.php';
-require_once __DIR__ . '/../public/src/utils/file.class.php';
-require_once __DIR__ . '/../public/src/entity/imagen.class.php';
-require_once __DIR__ . '/../public/src/database/connection.class.php';
-require_once __DIR__ . '/../public/src/database/queryBuilder.class.php';
-require_once __DIR__ . '/../app/repository/imagenesRepository.class.php';
-require_once __DIR__ . '/../app/repository/categoriasRepository.class.php';
+require_once __DIR__ . '/../../public/src/exceptions/fileException.class.php';
+require_once __DIR__ . '/../../public/src/utils/file.class.php';
+require_once __DIR__ . '/../../public/src/entity/Imagen.php';
+require_once __DIR__ . '/../../public/src/database/Connection.php';
+require_once __DIR__ . '/../../public/src/database/QueryBuilder.php';
+require_once __DIR__ . '/../../app/repository/ImagenesRepository.php';
+require_once __DIR__ . '/../../app/repository/CategoriasRepository.php';
 
 
 // $errores = [];
@@ -76,10 +76,6 @@ $titulo = "";
 $descripcion = "";
 $mensaje = "";
 try {
-	$config = require_once __DIR__ . '/../app/config.php';
-	App::bind('config', $config); // Guardamos la configuración en el contenedor de servicios
-	$conexion = App::getConnection();
-	//$queryBuilder = new QueryBuilder('imagenes', 'Imagen');
 	$imagenesRepository = new ImagenesRepository();
 
 	$categoriaRepository = new CategoriasRepository();
@@ -123,4 +119,4 @@ try {
 } catch (CategoriaException) {
 	$errores[] = "No se ha seleccionado una categoría válida";
 }
-require_once __DIR__ . '/views/galeria.view.php';
+require_once __DIR__ . '/../../app/views/galeria.view.php';

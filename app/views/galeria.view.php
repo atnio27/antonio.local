@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/inicio.part.php';
 require_once __DIR__ . '/navegacion.part.php';
-require_once __DIR__ . '/../galeria.php';
+require_once __DIR__ . '/../controllers/galeria.php';
 
 ?>
 
@@ -25,20 +25,20 @@ require_once __DIR__ . '/../galeria.php';
 			<hr>
 			<!-- Sección que muestra la confirmación del formulario o bien sus errores -->
 			<?php if ($_SERVER['REQUEST_METHOD'] === 'POST') : ?>
-			<div class="alert alert-<?= empty($errores) ? 'info' : 'danger'; ?> alert-dismissible" role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">x</span>
-				</button>
-				<?php if (empty($errores)) : ?>
-				<p><?= $mensaje ?></p>
-				<?php else : ?>
-				<ul>
-					<?php foreach ($errores as $error) : ?>
-					<li><?= $error ?></li>
-					<?php endforeach; ?>
-				</ul>
-				<?php endif; ?>
-			</div>
+				<div class="alert alert-<?= empty($errores) ? 'info' : 'danger'; ?> alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">x</span>
+					</button>
+					<?php if (empty($errores)) : ?>
+						<p><?= $mensaje ?></p>
+					<?php else : ?>
+						<ul>
+							<?php foreach ($errores as $error) : ?>
+								<li><?= $error ?></li>
+							<?php endforeach; ?>
+						</ul>
+					<?php endif; ?>
+				</div>
 			<?php endif; ?>
 			<!-- Formulario que permite subir una imagen con su descripción -->
 			<!-- Hay que indicar OBLIGATORIAMENTE enctype="multipart/form-data" para enviar ficheros al servidor -->
@@ -55,7 +55,7 @@ require_once __DIR__ . '/../galeria.php';
 						<label class="label-control">Categoria</label>
 						<select class="form-control" name="categoria">
 							<?php foreach ($categorias as $categoria) : ?>
-							<option value="<?= $categoria->getId() ?>"><?= $categoria->getNombre() ?></option>
+								<option value="<?= $categoria->getId() ?>"><?= $categoria->getNombre() ?></option>
 							<?php endforeach; ?>
 						</select>
 					</div>
@@ -90,18 +90,18 @@ require_once __DIR__ . '/../galeria.php';
 					</thead>
 					<tbody>
 						<?php foreach ($imagenes as $imagen) : ?>
-						<tr>
-							<th scope="row"><?= $imagen->getNombre() ?></th>
-							<td>
-								<img src="<?= $imagen->getUrlSubidas() ?>" alt="<?= $imagen->getDescripcion() ?>"
-									title="<?= $imagen->getDescripcion() ?>" width="100px">
-							</td>
-							<td><?= $imagen->getNumVisualizaciones() ?></td>
-							<td><?= $imagen->getNumLikes() ?></td>
-							<td><?= $imagen->getNumDownloads() ?></td>
-							<td><?= $imagen->getCategoria() ?></td>
-							<td><?= $imagenesRepository->getCategoria($imagen)->getNombre()?></td>
-						</tr>
+							<tr>
+								<th scope="row"><?= $imagen->getNombre() ?></th>
+								<td>
+									<img src="<?= $imagen->getUrlSubidas() ?>" alt="<?= $imagen->getDescripcion() ?>"
+										title="<?= $imagen->getDescripcion() ?>" width="100px">
+								</td>
+								<td><?= $imagen->getNumVisualizaciones() ?></td>
+								<td><?= $imagen->getNumLikes() ?></td>
+								<td><?= $imagen->getNumDownloads() ?></td>
+								<td><?= $imagen->getCategoria() ?></td>
+								<td><?= $imagenesRepository->getCategoria($imagen)->getNombre() ?></td>
+							</tr>
 						<?php endforeach; ?>
 					</tbody>
 				</table>
