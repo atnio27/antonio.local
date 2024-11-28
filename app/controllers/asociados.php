@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__ . '/../public/src/entity/asociado.class.php';
-require_once __DIR__ . '/../public/src/utils/file.class.php';
-require_once __DIR__ . '/../public/src/utils/utils.class.php';
-require_once __DIR__ . '/../public/src/database/connection.class.php';
+require_once __DIR__ . '/../../public/src/entity/Asociado.php';
+require_once __DIR__ . '/../../public/src/utils/file.class.php';
+require_once __DIR__ . '/../../public/src/utils/utils.class.php';
+require_once __DIR__ . '/../../public/src/database/Connection.php';
 session_start();
 
 $mensaje = '';
@@ -45,4 +45,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	}
 }
 
-require_once __DIR__ . '../views/Asociados.view.php';
+require_once __DIR__ . '../../views/Asociados.view.php';

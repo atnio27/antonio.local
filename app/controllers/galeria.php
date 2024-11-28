@@ -8,115 +8,19 @@ require_once __DIR__ . '/../../app/repository/ImagenesRepository.php';
 require_once __DIR__ . '/../../app/repository/CategoriasRepository.php';
 
 
-// $errores = [];
-// $titulo = "";
-// $descripcion = "";
-// $mensaje = "";
-
-// session_start();
-
-// if (isset($_POST['captcha']) && ($_POST['captcha'] != "")) {
-// 	if ($_SESSION['captchaGenerado'] != $_POST['captcha']) {
-// 		$mensaje = "¡Ha introducido un código de seguridad incorrecto! Inténtelo de nuevo.";
-// 		$errores = [];
-// 		$nombre = "";
-// 		$descripcion = "";
-// 	} else {
-// 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-// 			try {
-// 				$titulo = trim(htmlspecialchars($_POST['titulo']));
-// 				$descripcion = trim(htmlspecialchars($_POST['descripcion']));
-// 				$tiposAceptados = ['image/jpeg', 'image/gif', 'image/png'];
-// 				$imagen = new File('imagen', $tiposAceptados); // El nombre 'imagen' es el que se ha puesto en el formulario de galeria.view.php
-// 				$imagen->saveUploadFile(Imagen::RUTA_IMAGENES_SUBIDAS);
-// 				// $mensaje = "Datos enviados";
-// 				$conexion = Connection::make();
-// 				$sql = "INSERT INTO imagenes (nombre, descripcion, categoria) VALUES (:nombre,:descripcion,:categoria)";
-// 				$pdoStatement = $conexion->prepare($sql);
-// 				$parametros = [
-// 					':nombre' => $imagen->getFileName(),
-// 					':descripcion' => $descripcion,
-// 					':categoria' => '1'
-// 				];
-// 				if ($pdoStatement->execute($parametros) === false)
-// 					$errores[] = "No se ha podido guardar la imagen en la base de datos";
-// 				else {
-// 					$descripcion = "";
-// 					$mensaje = "Se ha guardado la imagen correctamente";
-// 				}
-// 			} catch (FileException $fileException) {
-// 				$errores[] = $fileException->getMessage();
-// 			}
-// 		}
-// 	}
-// } else {
-// 	$mensaje = "Introduzca el código de seguridad.";
-// 	$errores = [];
-// 	$nombre = "";
-// 	$descripcion = "";
-// }
-
-// // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-// // 	try {
-// // 		$titulo = trim(htmlspecialchars($_POST['titulo']));
-// // 		$descripcion = trim(htmlspecialchars($_POST['descripcion']));
-// // 		$tiposAceptados = ['image/jpeg', 'image/gif', 'image/png'];
-// // 		$imagen = new File('imagen', $tiposAceptados); // El nombre 'imagen' es el que se ha puesto en el formulario de galeria.view.php
-// // 		$imagen->saveUploadFile(Imagen::RUTA_IMAGENES_SUBIDAS);
-// // 		$mensaje = "Datos enviados";
-// // 	} catch (FileException $fileException) {
-// // 		$errores[] = $fileException->getMessage();
-// // 	}
-// // }
-
-// require_once __DIR__ . '/views/galeria.view.php';
-
 $errores = [];
 $titulo = "";
 $descripcion = "";
 $mensaje = "";
 try {
+	$conexion = App::getConnection();
 	$imagenesRepository = new ImagenesRepository();
-
-	$categoriaRepository = new CategoriasRepository();
-	$categorias = $categoriaRepository->findAll();
-
-
-
-	// $imagenes = $queryBuilder->findAll();
+	$categoriasRepository = new CategoriasRepository();
 	$imagenes = $imagenesRepository->findAll();
-	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		$titulo = trim(htmlspecialchars($_POST['titulo']));
-		$descripcion = trim(htmlspecialchars($_POST['descripcion']));
-
-
-
-		$categoria = trim(htmlspecialchars($_POST['categoria']));
-		if (empty($categoria))
-			throw new CategoriaException;
-
-
-		$tiposAceptados = ['image/jpeg', 'image/gif', 'image/png'];
-		$imagen = new File('imagen', $tiposAceptados); // El nombre 'imagen' es el que se ha puesto en elformulario de galeria.view.php
-		$imagen->saveUploadFile(Imagen::RUTA_IMAGENES_SUBIDAS);
-		$imagenGaleria = new Imagen($imagen->getFileName(), $descripcion, $categoria);
-		// $queryBuilder->save($imagenGaleria);
-		$imagenesRepository->guarda($imagenGaleria);
-
-
-
-
-		$mensaje = "Se ha guardado la imagen correctamente";
-		// $imagenes = $queryBuilder->findAll();
-		$imagenes = $imagenesRepository->findAll();
-	}
-} catch (FileException $fileException) {
-	$errores[] = $fileException->getMessage();
+	$categorias = $categoriasRepository->findAll();
 } catch (QueryException $queryException) {
-	$errores[] = $queryException->getMessage();
+	$errores[] = $fileException->getMessage();
 } catch (AppException $appException) {
 	$errores[] = $appException->getMessage();
-} catch (CategoriaException) {
-	$errores[] = "No se ha seleccionado una categoría válida";
 }
-require_once __DIR__ . '/../../app/views/galeria.view.php';
+require_once __DIR__ . '/../views/galeria.view.php';

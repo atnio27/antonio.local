@@ -17,36 +17,36 @@ require_once __DIR__ . '/../../public/src/utils/utils.class.php';
 		</div>
 		<div class="collapse navbar-collapse navbar-right" id="menu">
 			<ul class="nav navbar-nav">
-				<?php if (Utils::esOpcionMenuActiva('/index.php') == true || Utils::esOpcionMenuActiva('/') == true)
+				<?php if (Utils::esOpcionMenuActiva('/index') == true || Utils::esOpcionMenuActiva('/') == true)
 					echo '<li class="active lien">';
 				else echo '<li class=”0lien”>'; ?>
 				<a href="/"><i class="fa fa-home sr-icons"></i> Home</a>
 				</li>
-				<?php if (Utils::esOpcionMenuActiva('/galeria.php') == true)
+				<?php if (Utils::esOpcionMenuActiva('/galeria') == true)
 					echo '<li class="active lien">';
 				else echo '<li class=”0lien”>'; ?>
 				<a href="/galeria"><i class="fa fa-star sr-icons"></i> Galería</a>
 				</li>
-				<?php if (Utils::esOpcionMenuActiva('/about.php') == true)
+				<?php if (Utils::esOpcionMenuActiva('/about') == true)
 					echo '<li class="active lien">';
 				else echo '<li class=”0lien”>'; ?>
 				<a href="/about"><i class="fa fa-bookmark sr-icons"></i>
 					About</a>
 				</li>
-				<?php if (Utils::esOpcionMenuActiva('/blog.php') == true)
+				<?php if (Utils::esOpcionMenuActiva('/blog') == true)
 					echo '<li class="active lien">';
 				else echo '<li class=”0lien”>'; ?>
 				<a href="/blog"><i class="fa fa-file-text sr-icons"></i>
 					Blog</a>
 				</li>
-				<?php if (Utils::esOpcionMenuActiva('/contact.php') == true)
+				<?php if (Utils::esOpcionMenuActiva('/contact') == true)
 					echo '<li class="active lien">';
 				else echo '<li class=”0lien”>'; ?>
 				<a href="/contact"><i class="fa fa-phone-square sr-icons"></i>
 					Contact</a>
 				</li>
 				</li>
-				<?php if (Utils::esOpcionMenuActiva('/asociados.php') == true)
+				<?php if (Utils::esOpcionMenuActiva('/asociados') == true)
 					echo '<li class="active lien">';
 				else echo '<li class=”0lien”>'; ?>
 				<a href="/asociados"><i class="fa fa-bookmark sr-icons"></i>

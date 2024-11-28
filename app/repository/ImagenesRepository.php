@@ -1,5 +1,8 @@
 <?php
 
+require_once __DIR__ . "../../../public/src/database/QueryBuilder.php";
+require_once __DIR__ . "../../../app/repository/CategoriasRepository.php";
+
 class ImagenesRepository extends QueryBuilder
 {
 	/**
