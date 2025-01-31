@@ -1,22 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php
-require_once __DIR__ . '/inicio.part.php';
-?>
+<head>
+</head>
 
 <body id="page-top">
-
-	<!-- Navigation Bar -->
-	<?php
-	require_once __DIR__ . '/navegacion.part.php';
-	?>
-	<!-- End of Navigation Bar -->
-
-	<!-- Principal Content Start-->
 	<div id="about">
 
-		<!-- Header -->
 		<div class="row">
 			<div class="col-xs-12 intro">
 				<div class="carousel-inner">
@@ -31,9 +21,7 @@ require_once __DIR__ . '/inicio.part.php';
 				</div>
 			</div>
 		</div>
-		<!-- End of header -->
 
-		<!-- Container Box -->
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
@@ -93,7 +81,6 @@ require_once __DIR__ . '/inicio.part.php';
 				</div>
 			</div>
 
-			<!-- Pricing Tables -->
 			<div class="row pricing text-center">
 				<h3>FORMATION PRICING TABLES</h3>
 				<hr>
@@ -140,26 +127,16 @@ require_once __DIR__ . '/inicio.part.php';
 					</div>
 				</div>
 			</div>
-			<!-- End of Pricing Tables -->
 
-			<!-- Clients Feedback -->
 			<div class="row feedback text-center">
 				<h3>CLIENTS FEEDBACK</h3>
 				<hr>
-				<?php
-				require_once __DIR__ . '/imagen-cliente.part.php';
-				?>
+				<?php require __DIR__ . '/imagen-cliente.part.php'; ?>
 			</div>
-			<!-- End of Clients Feedback -->
 
 		</div>
-		<!-- End of container Box -->
 	</div>
-	<!-- End of principal content -->
 
-	<?php
-	require_once __DIR__ . '/fin.part.php';
-	?>
 </body>
 
 </html>

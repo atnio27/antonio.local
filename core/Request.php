@@ -1,4 +1,7 @@
 <?php
+
+namespace antonio\core;
+
 class Request
 {
 	public static function uri()

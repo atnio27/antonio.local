@@ -1,105 +1,85 @@
-<?php
-require_once __DIR__ . '/inicio.part.php';
-require_once __DIR__ . '/navegacion.part.php';
-require_once __DIR__ . '/../controllers/galeria.php';
-
-?>
-
-<div class="hero hero-inner">
+<div class="hero hero-inner text-left py-5 bg-success text-white">
 	<div class="container">
-		<div class="row align-items-center">
-			<div class="col-lg-6 mx-auto text-center">
-				<div class="intro-wrap">
-					<h1 class="mb-0">Galería</h1>
-					<p class="text-white">Nuestros viajeros comparten aquí sus mejores experiencias. </p>
-				</div>
-			</div>
-		</div>
+		<h1 class="mb-3">Galería</h1>
+		<p class="lead">Sube tu moto y compártela con la comunidad!</p>
 	</div>
 </div>
-<!-- Principal Content Start -->
-<div id="galeria">
+
+<div id="galeria" class="py-5 bg-light text-left">
 	<div class="container">
-		<div class="col-xs-12 col-sm-8 col-sm-push-2">
-			<h2>Subir imágenes:</h2>
-			<hr>
-			<!-- Sección que muestra la confirmación del formulario o bien sus errores -->
-			<?php if ($_SERVER['REQUEST_METHOD'] === 'POST') : ?>
-				<div class="alert alert-<?= empty($errores) ? 'info' : 'danger'; ?> alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">x</span>
-					</button>
-					<?php if (empty($errores)) : ?>
-						<p><?= $mensaje ?></p>
-					<?php else : ?>
-						<ul>
-							<?php foreach ($errores as $error) : ?>
-								<li><?= $error ?></li>
-							<?php endforeach; ?>
-						</ul>
-					<?php endif; ?>
-				</div>
-			<?php endif; ?>
-			<!-- Formulario que permite subir una imagen con su descripción -->
-			<!-- Hay que indicar OBLIGATORIAMENTE enctype="multipart/form-data" para enviar ficheros al servidor -->
-			<form clas="form-horizontal" action="/galeria/nueva" method="post" enctype="multipart/form-data">
-				<div class="form-group">
-					<div class="col-xs-12">
-						<label class="label-control">Imagen</label>
-						<input class="form-control-file" type="file" name="imagen">
+		<div>
+			<div class="card shadow-lg p-5 bg-white">
+				<h2 class="text-left text-success">Subir imágenes</h2>
+				<hr>
+
+				<?php if (!empty($mensaje) || !empty($errores)) : ?>
+					<div class="alert alert-<?= empty($errores) ? 'success' : 'danger'; ?> alert-dismissible fade show" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<?php if (empty($errores)) : ?>
+							<p><?= $mensaje ?></p>
+						<?php else : ?>
+							<ul>
+								<?php foreach ($errores as $error) : ?>
+									<li><?= $error ?></li>
+								<?php endforeach; ?>
+							</ul>
+						<?php endif; ?>
 					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-xs-12">
-						<label class="label-control">Categoria</label>
-						<select class="form-control" name="categoria">
+				<?php endif; ?>
+
+				<form class="form text-left" action="/galeria/nueva" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label for="categoria" class="text-success font-weight-bold">Categoría</label>
+						<select class="form-control custom-select text-left" name="categoria">
 							<?php foreach ($categorias as $categoria) : ?>
-								<option value="<?= $categoria->getId() ?>"><?= $categoria->getNombre() ?></option>
+								<option value="<?= $categoria->getId() ?>"
+									<?= ($categoriaSeleccionada == $categoria->getId()) ? 'selected' : '' ?>>
+									<?= $categoria->getNombre() ?>
+								</option>
 							<?php endforeach; ?>
 						</select>
 					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-xs-12">
-						<label class="label-control">Titulo</label>
-						<input type="text" class="form-control" id="titulo" name="titulo" value="<?= $titulo ?>">
-						<label class="label-control">Descripción</label>
-						<textarea class="form-control" name="descripcion"><?= $descripcion ?></textarea>
-						<!-- CAPTCAHA -->
-						<label class="label-control">Introduce el captcha <img style="border: 1px solid #D3D0D0 "
-								src="/src/utils/captcha.class.php" id='captcha'></label>
-						<input class="form-control" type="text" name="captcha">
-						<button class="pull-right btn btn-lg sr-button">ENVIAR</button>
+					<div class="form-group text-left">
+						<label for="imagen" class="text-success font-weight-bold">Imagen</label>
+						<input class="form-control-file text-left" type="file" name="imagen">
 					</div>
-				</div>
-			</form>
-			<hr class="divider">
-			<div class="imagenes_galeria">
-				<table class="table">
-					<thead>
+					<div class="form-group">
+						<label for="titulo" class="text-success font-weight-bold">Título</label>
+						<input type="text" class="form-control text-left" id="titulo" name="titulo" value="<?= $titulo ?>">
+					</div>
+					<div class="form-group">
+						<label for="descripcion" class="text-success font-weight-bold">Descripción</label>
+						<textarea class="form-control text-left" name="descripcion" rows="3"><?= $descripcion ?></textarea>
+					</div>
+					<button class="btn btn-success btn-lg btn-block">ENVIAR</button>
+				</form>
+			</div>
+			<hr>
+			<div class="imagenes_galeria mt-4">
+				<table class="table table-hover table-bordered text-left bg-white">
+					<thead class="bg-success text-white">
 						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Imagen</th>
-							<th scope="col">Visualizaciones</th>
-							<th scope="col">Likes</th>
-							<th scope="col">Descargas</th>
-							<th scope=”col”>Categoria</th>
-
+							<th>#</th>
+							<th>Imagen</th>
+							<th>Visualizaciones</th>
+							<th>Likes</th>
+							<th>Descargas</th>
+							<th>Categoría</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php foreach ($imagenes as $imagen) : ?>
 							<tr>
-								<th scope="row"><?= $imagen->getNombre() ?></th>
+								<td><?= $imagen->getNombre() ?></td>
 								<td>
-									<img src="<?= $imagen->getUrlSubidas() ?>" alt="<?= $imagen->getDescripcion() ?>"
-										title="<?= $imagen->getDescripcion() ?>" width="100px">
+									<img src="<?= $imagen->getUrlSubidas() ?>" class="img-thumbnail" alt="<?= $imagen->getDescripcion() ?>" width="100">
 								</td>
 								<td><?= $imagen->getNumVisualizaciones() ?></td>
 								<td><?= $imagen->getNumLikes() ?></td>
 								<td><?= $imagen->getNumDownloads() ?></td>
 								<td><?= $imagen->getCategoria() ?></td>
-								<td><?= $imagenesRepository->getCategoria($imagen)->getNombre() ?></td>
 							</tr>
 						<?php endforeach; ?>
 					</tbody>
@@ -108,6 +88,3 @@ require_once __DIR__ . '/../controllers/galeria.php';
 		</div>
 	</div>
 </div>
-
-<?php
-require_once __DIR__ . '/fin.part.php';

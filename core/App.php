@@ -1,6 +1,11 @@
 <?php
-require_once __DIR__ . '/../public/src/exceptions/appException.class.php';
-require_once __DIR__ . '/../public/src/database/Connection.php';
+
+namespace antonio\core;
+
+use antonio\app\exceptions\AppException;
+use antonio\core\database\Connection;
+use antonio\core\database\QueryBuilder;
+
 class App
 {
 	/**
@@ -35,5 +40,13 @@ class App
 		if (!array_key_exists('connection', static::$container))
 			static::$container['connection'] = Connection::make();
 		return static::$container['connection'];
+	}
+
+	public static function getRepository(string $className): QueryBuilder
+	{
+		if (!array_key_exists($className, static::$container))
+			static::$container[$className] = new $className();
+
+		return static::$container[$className];
 	}
 }

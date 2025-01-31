@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html>
 
-<?php
-	require_once __DIR__ . '/inicio.part.php';
-	?>
+<head>
+</head>
 
 <body id="page-top">
-
-	<!-- Navigation Bar -->
-	<?php
-  require_once __DIR__ . '/navegacion.part.php';
-  ?>
-	<!-- End of Navigation Bar -->
 
 	<!-- Principal Content Start -->
 	<div id="contact">
@@ -78,9 +71,15 @@
 	</div>
 	<!-- Principal Content Start -->
 
-	<?php
-	require_once __DIR__ . '/fin.part.php';
-	?>
+	<!-- Jquery -->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<!-- Bootstrap core Javascript -->
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<!-- Plugins -->
+	<script type="text/javascript" src="js/jquery.easing.min.js"></script>
+	<script type="text/javascript" src="js/jquery.magnific-popup.min.js"></script>
+	<script type="text/javascript" src="js/scrollreveal.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
 </body>
 
 </html>

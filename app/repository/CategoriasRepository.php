@@ -1,12 +1,13 @@
 <?php
 
+namespace antonio\app\repository;
+
+use antonio\app\entity\Categoria;
+use antonio\core\database\QueryBuilder;
+
 class CategoriasRepository extends QueryBuilder
 {
-	/**
-	 * @param string $table
-	 * @param string $classEntity
-	 */
-	public function __construct(string $table = 'categorias', string $classEntity = 'Categoria')
+	public function __construct(string $table = 'categorias', string $classEntity = Categoria::class)
 	{
 		parent::__construct($table, $classEntity);
 	}

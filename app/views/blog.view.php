@@ -1,18 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php
-	require_once __DIR__ . '/inicio.part.php';
-	?>
+<head>
+</head>
 
 <body id="page-top">
-
-	<!-- Navigation Bar -->
-	<?php
-  require_once __DIR__ . '/navegacion.part.php';
-  ?>
-	<!-- End of Navigation Bar -->
-
 	<!-- Principal Content Start -->
 	<div id="blog">
 		<div class="container">
@@ -24,8 +16,7 @@
 						<div class="post">
 							<div class="post-heading">
 								<span>6 JANUARY</span>
-								<img class="img-responsive" src="/public/images/blog/landscape.jpg"
-									alt="post's picture">
+								<img class="img-responsive" src="images/blog/landscape.jpg" alt="post's picture">
 							</div>
 							<div class="post-body">
 								<h3><a href="single_post.html"><strong>doloremque illum</strong></a></h3>
@@ -47,7 +38,7 @@
 						<div class="post">
 							<div class="post-heading">
 								<span>7 FEBRUARY</span>
-								<img class="img-responsive" src="/public/images/blog/family.jpg" alt="post's picture">
+								<img class="img-responsive" src="images/blog/family.jpg" alt="post's picture">
 							</div>
 							<div class="post-body">
 								<h3><a href="single_post.html"><strong>Lorem ipsum</strong></a></h3>
@@ -70,7 +61,7 @@
 						<div class="post">
 							<div class="post-heading">
 								<span>8 MARCH</span>
-								<img class="img-responsive" src="/public/images/blog/elephant.jpg" alt="post's picture">
+								<img class="img-responsive" src="images/blog/elephant.jpg" alt="post's picture">
 							</div>
 							<div class="post-body">
 								<h3><a href="single_post.html"><strong>Aliquam soluta</strong></a></h3>
@@ -135,7 +126,7 @@
 					<div class="post">
 						<div class="post-heading">
 							<span>10 APRIL</span>
-							<img class="img-responsive" src="/public/images/blog/wedding.jpg" alt="post's picture">
+							<img class="img-responsive" src="images/blog/wedding.jpg" alt="post's picture">
 						</div>
 						<div class="post-body">
 							<span>
@@ -148,7 +139,7 @@
 					<div class="post">
 						<div class="post-heading">
 							<span>12 MAY</span>
-							<img class="img-responsive" src="/public/images/blog/woman.jpg" alt="post's picture">
+							<img class="img-responsive" src="images/blog/woman.jpg" alt="post's picture">
 						</div>
 						<div class="post-body">
 							<span>
@@ -164,11 +155,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- End of Principal Content Start -->
-
-	<?php
-	require_once __DIR__ . '/fin.part.php';
-	?>
 </body>
 
 </html>
