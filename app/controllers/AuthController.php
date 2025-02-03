@@ -31,6 +31,12 @@ class AuthController
 		App::get('router')->redirect('login');
 	}
 
+	public function getCurrentUserId()
+	{
+		$a = $_SESSION['loguedUser'];
+		return $a;
+	}
+
 	public function checkLogin()
 	{
 		try {
@@ -100,6 +106,139 @@ class AuthController
 		} catch (ValidationException $validationException) {
 			FlashMessage::set('registro-error', [$validationException->getMessage()]);
 			App::get('router')->redirect('registro');
+		}
+	}
+
+	public function profile()
+	{
+		// Check if user is logged in
+		if (!isset($_SESSION['loguedUser'])) {
+			App::get('router')->redirect('login');
+		}
+
+		// Retrieve user information
+		$userId = $_SESSION['loguedUser'];
+		$usuario = App::getRepository(UsuariosRepository::class)->find($userId);
+
+		if (!$usuario) {
+			throw new \Exception("Usuario no encontrado.");
+		}
+
+		// Render the profile view with the user data
+		Response::renderView('profile', 'layout', [
+			'username' => $usuario->getUsername(),
+		]);
+	}
+
+	public function editProfileUsername()
+	{
+		if (!isset($_SESSION['loguedUser'])) {
+			App::get('router')->redirect('login');
+		}
+
+		$userId = $_SESSION['loguedUser'];
+		$usuario = App::getRepository(UsuariosRepository::class)->find($userId);
+
+		Response::renderView('edit-profile-username', 'layout', compact('usuario'));
+	}
+
+	public function updateUsername()
+	{
+		try {
+			if (!isset($_SESSION['loguedUser'])) {
+				throw new ValidationException("No user is logged in.");
+			}
+
+			$usuarioId = $_SESSION['loguedUser'];
+			$usuarioRepo = App::getRepository(UsuariosRepository::class);
+			$usuario = $usuarioRepo->find($usuarioId);
+
+			if (!$usuario) {
+				throw new ValidationException("User not found.");
+			}
+
+			// Validate new username
+			if (!isset($_POST['username']) || empty($_POST['username'])) {
+				throw new ValidationException("El nombre de usuario no puede estar vacío.");
+			}
+
+			$newUsername = $_POST['username'];
+
+			// Check if the new username already exists
+			$existingUser = $usuarioRepo->findOneBy(['username' => $newUsername]);
+			if ($existingUser && $existingUser->getId() !== $usuario->getId()) {
+				throw new ValidationException("El nombre de usuario ya está en uso.");
+			}
+
+			// Update the username in the database
+			$usuario->setUsername($newUsername);
+			$usuarioRepo->update($usuario);
+
+			// Update the session with the new username
+			$_SESSION['loguedUser'] = $usuario->getId(); // Make sure the session is still valid
+
+			// Set a success message
+			FlashMessage::set('success', "Nombre de usuario actualizado correctamente.");
+			App::get('router')->redirect('profile');
+		} catch (ValidationException $validationException) {
+			FlashMessage::set('error', $validationException->getMessage());
+			App::get('router')->redirect('profile/edit-username');
+		}
+	}
+
+	public function editProfilePassword()
+	{
+		if (!isset($_SESSION['loguedUser'])) {
+			App::get('router')->redirect('login');
+		}
+
+		$userId = $_SESSION['loguedUser'];
+		$usuario = App::getRepository(UsuariosRepository::class)->find($userId);
+
+		Response::renderView('edit-profile-password', 'layout', compact('usuario'));
+	}
+
+	public function updatePassword()
+	{
+		try {
+			if (!isset($_SESSION['loguedUser'])) {
+				throw new ValidationException("No user is logged in.");
+			}
+
+			$usuarioId = $_SESSION['loguedUser'];
+			$usuarioRepo = App::getRepository(UsuariosRepository::class);
+			$usuario = $usuarioRepo->find($usuarioId);
+
+			if (!$usuario) {
+				throw new ValidationException("User not found.");
+			}
+
+			// Validate new username
+			if (!isset($_POST['username']) || empty($_POST['username'])) {
+				throw new ValidationException("El nombre de usuario no puede estar vacío.");
+			}
+
+			$newUsername = $_POST['username'];
+
+			// Check if the new username already exists
+			$existingUser = $usuarioRepo->findOneBy(['username' => $newUsername]);
+			if ($existingUser && $existingUser->getId() !== $usuario->getId()) {
+				throw new ValidationException("El nombre de usuario ya está en uso.");
+			}
+
+			// Update the username in the database
+			$usuario->setPassword($newUsername);
+			$usuarioRepo->update($usuario);
+
+			// Update the session with the new username
+			$_SESSION['loguedUser'] = $usuario->getId(); // Make sure the session is still valid
+
+			// Set a success message
+			FlashMessage::set('success', "Contraseña de usuario actualizado correctamente.");
+			App::get('router')->redirect('profile');
+		} catch (ValidationException $validationException) {
+			FlashMessage::set('error', $validationException->getMessage());
+			App::get('router')->redirect('profile/edit-password');
 		}
 	}
 }

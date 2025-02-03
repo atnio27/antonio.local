@@ -1,6 +1,6 @@
 <div class="hero hero-inner text-left py-5 bg-success text-white">
 	<div class="container">
-		<h1 class="mb-3">Galería</h1>
+		<h1 class="mb-3">Mi galería</h1>
 		<p class="lead">Sube tu moto y compártela con la comunidad!</p>
 	</div>
 </div>
@@ -67,6 +67,7 @@
 							<th>Likes</th>
 							<th>Descargas</th>
 							<th>Categoría</th>
+							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -80,6 +81,12 @@
 								<td><?= $imagen->getNumLikes() ?></td>
 								<td><?= $imagen->getNumDownloads() ?></td>
 								<td><?= $imagen->getCategoria() ?></td>
+								<td>
+									<form action="/galeria/borrar" method="POST" enctype="multipart/form-data" style="display:inline;">
+										<input type="hidden" name="id" value="<?= $imagen->getId() ?>">
+										<button type="submit" class="btn btn-danger btn-sm">Borrar</button>
+									</form>
+								</td>
 							</tr>
 						<?php endforeach; ?>
 					</tbody>

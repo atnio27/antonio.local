@@ -11,6 +11,7 @@ use antonio\core\App;
 use antonio\app\exceptions\CategoriaException;
 use antonio\app\exceptions\FileException;
 use antonio\app\entity\Imagen;
+use antonio\app\exceptions\NotFoundException;
 use antonio\app\exceptions\ValidationException;
 use antonio\app\utils\File;
 use antonio\core\Response;
@@ -27,7 +28,9 @@ class GaleriaController
 		$titulo = FlashMessage::get('titulo');
 
 		try {
-			$imagenes = App::getRepository(ImagenesRepository::class)->findAll();
+			$authController = new AuthController();
+			$usuarioId = $authController->getCurrentUserId();
+			$imagenes = App::getRepository(ImagenesRepository::class)->findBy(['idUsuario' => $usuarioId]);
 			$categorias = App::getRepository(CategoriasRepository::class)->findAll();
 		} catch (QueryException $queryException) {
 			FlashMessage::set('errores', [$queryException->getMessage()]);
@@ -64,7 +67,10 @@ class GaleriaController
 
 			$imagen->saveUploadFile(Imagen::RUTA_IMAGENES_SUBIDAS);
 
-			$imagenGaleria = new Imagen($imagen->getFileName(), $descripcion, $categoria);
+			$authController = new AuthController();
+			$usuarioId = $authController->getCurrentUserId();
+
+			$imagenGaleria = new Imagen($imagen->getFileName(), $descripcion, $categoria, $usuarioId);
 			$imagenesRepository->save($imagenGaleria);
 
 			$mensaje = "Se ha guardado una imagen: " . $imagenGaleria->getNombre();
@@ -85,6 +91,32 @@ class GaleriaController
 			FlashMessage::set('errores', [$appException->getMessage()]);
 		} catch (CategoriaException) {
 			FlashMessage::set('errores', ["No se ha seleccionado una categoría válida"]);
+		}
+
+		App::get('router')->redirect('galeria');
+	}
+
+	public function borrar()
+	{
+		try {
+			$imagenesRepository = App::getRepository(ImagenesRepository::class);
+			$id = $_POST['id'];
+
+			$imagen = $imagenesRepository->find($id);
+			if ($imagen) {
+				$imagenesRepository->borrar($imagen);
+				$mensaje = "Se ha borrado la imagen: " . $imagen->getNombre();
+				App::get('logger')->add($mensaje);
+				FlashMessage::set('mensaje', $mensaje);
+			} else {
+				throw new NotFoundException("No se ha encontrado la imagen con id $id.");
+			}
+		} catch (NotFoundException $notFoundException) {
+			FlashMessage::set('errores', [$notFoundException->getMessage()]);
+		} catch (QueryException $queryException) {
+			FlashMessage::set('errores', [$queryException->getMessage()]);
+		} catch (AppException $appException) {
+			FlashMessage::set('errores', [$appException->getMessage()]);
 		}
 
 		App::get('router')->redirect('galeria');

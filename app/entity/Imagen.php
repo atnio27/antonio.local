@@ -9,6 +9,7 @@ class Imagen implements IEntity
 	private $id = null;
 	private $nombre = "";
 	private $descripcion = "";
+	private $idUsuario = null;
 	private $categoria = 1;
 	private $numVisualizaciones = 0;
 	private $numLikes = 0;
@@ -19,10 +20,11 @@ class Imagen implements IEntity
 	const RUTA_IMAGENES_CLIENTES = '/public/images/clients/';
 	const RUTA_IMAGENES_SUBIDAS = '/public/images/imagenes_subidas/';
 
-	public function __construct($nombre = "", $descripcion = "", $categoria = 1, $numVisualizaciones = 0, $numLikes = 0, $numDownloads = 0)
+	public function __construct($nombre = "", $descripcion = "", $categoria = 1, $idUsuario = null, $numVisualizaciones = 0, $numLikes = 0, $numDownloads = 0)
 	{
 		$this->nombre = $nombre;
 		$this->descripcion = $descripcion;
+		$this->idUsuario = $idUsuario;
 		$this->categoria = $categoria;
 		$this->numVisualizaciones = $numVisualizaciones;
 		$this->numLikes = $numLikes;
@@ -35,6 +37,7 @@ class Imagen implements IEntity
 			'id' => $this->getId(),
 			'nombre' => $this->getNombre(),
 			'descripcion' => $this->getDescripcion(),
+			'idUsuario' => $this->idUsuario,
 			'numVisualizaciones' => $this->getNumVisualizaciones(),
 			'numLikes' => $this->getNumLikes(),
 			'numDownloads' => $this->getNumDownloads(),
@@ -53,6 +56,10 @@ class Imagen implements IEntity
 	public function getDescripcion()
 	{
 		return $this->descripcion;
+	}
+	public function getIdUsuario()
+	{
+		return $this->idUsuario;
 	}
 	public function getCategoria()
 	{
@@ -78,6 +85,11 @@ class Imagen implements IEntity
 	public function setDescripcion($descripcion): Imagen
 	{
 		$this->descripcion = $descripcion;
+		return $this;
+	}
+	public function setIdUsuario($idUsuario): Imagen
+	{
+		$this->idUsuario = $idUsuario;
 		return $this;
 	}
 	public function setCategoria($categoria): Imagen

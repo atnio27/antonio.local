@@ -47,13 +47,6 @@ class PagesController
 			'layout'
 		);
 	}
-	public function contact()
-	{
-		Response::renderView(
-			'contact',
-			'layout'
-		);
-	}
 	public function post()
 	{
 		Response::renderView(

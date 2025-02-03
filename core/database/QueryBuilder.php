@@ -148,4 +148,15 @@ abstract class QueryBuilder
 			return $result[0];
 		return null;
 	}
+
+	public function delete(int $id): void
+	{
+		try {
+			$sql = "DELETE FROM $this->table WHERE id = :id";
+			$statement = $this->connection->prepare($sql);
+			$statement->execute(['id' => $id]);
+		} catch (PDOException $pdoException) {
+			throw new QueryException("No se ha podido eliminar el elemento con id $id");
+		}
+	}
 }

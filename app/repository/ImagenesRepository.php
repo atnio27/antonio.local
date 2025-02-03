@@ -30,4 +30,12 @@ class ImagenesRepository extends QueryBuilder
 		};
 		$this->executeTransaction($fnGuardaImagen); // Se pasa un callable
 	}
+
+	public function borrar(Imagen $imagenGaleria)
+	{
+		$fnBorrarImagen = function () use ($imagenGaleria) {
+			$this->delete($imagenGaleria->getId());
+		};
+		$this->executeTransaction($fnBorrarImagen);
+	}
 }

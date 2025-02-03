@@ -45,6 +45,10 @@ use antonio\app\utils\Utils;
                     <?php if (Utils::esOpcionMenuActiva('/logout') == true) echo '<li class="active lien">';
                     else echo '<li class=" lien">'; ?>
                     <a href="/logout"><i class="fa fa-sign-out sr-icons"></i> <?= $app['user']->getUsername() ?></a></li>
+                    <li class="lien <?= Utils::esOpcionMenuActiva('/profile') ? 'active' : '' ?>">
+                        <a href="/profile"><i class="fa fa-bookmark sr-icons"></i> Perfil</a>
+                    </li>
+
                 <?php endif; ?>
 
                 <!-- <li class="lien <?= Utils::esOpcionMenuActiva('/about') ? 'active' : '' ?>">

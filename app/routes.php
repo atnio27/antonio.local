@@ -1,10 +1,15 @@
 <?php
 // $router->get('asociados', 'app/controllers/asociados.php');
 $router->get('blog', 'PagesController@blog');
-$router->get('contact', 'PagesController@contact');
+$router->get('profile', 'AuthController@profile');
+$router->get('profile/edit-username', 'AuthController@editProfileUsername', 'ROLE_USER');
+$router->post('profile/update-username', 'AuthController@updateUsername', 'ROLE_USER');
+$router->get('profile/edit-password', 'AuthController@editProfilePassword', 'ROLE_USER');
+$router->post('profile/update-password', 'AuthController@updatePassword', 'ROLE_USER');
 $router->get('post', 'PagesController@post');
 $router->get('galeria', 'GaleriaController@index', 'ROLE_USER');
-$router->post('galeria/nueva', 'GaleriaController@nueva', 'ROLE_ADMIN');
+$router->post('galeria/nueva', 'GaleriaController@nueva', 'ROLE_USER');
+$router->post('galeria/borrar', 'GaleriaController@borrar', 'ROLE_USER');
 // $router->post('asociados/nuevo', 'app/controllers/asociados_nuevo.php');
 $router->get('galeria/:id', 'GaleriaController@show', 'ROLE_USER');
 $router->get('login', 'AuthController@login');
