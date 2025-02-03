@@ -13,6 +13,7 @@ use antonio\app\exceptions\FileException;
 use antonio\app\entity\Imagen;
 use antonio\app\exceptions\NotFoundException;
 use antonio\app\exceptions\ValidationException;
+use antonio\app\repository\UsuariosRepository;
 use antonio\app\utils\File;
 use antonio\core\Response;
 
@@ -30,7 +31,15 @@ class GaleriaController
 		try {
 			$authController = new AuthController();
 			$usuarioId = $authController->getCurrentUserId();
-			$imagenes = App::getRepository(ImagenesRepository::class)->findBy(['idUsuario' => $usuarioId]);
+			$usuario = App::getRepository(UsuariosRepository::class)->find($usuarioId);
+			$isAdmin = $usuario->getRole() === 'ROLE_ADMIN';
+
+			if ($isAdmin) {
+				$imagenes = App::getRepository(ImagenesRepository::class)->findAll();
+			} else {
+				$imagenes = App::getRepository(ImagenesRepository::class)->findBy(['idUsuario' => $usuarioId]);
+			}
+
 			$categorias = App::getRepository(CategoriasRepository::class)->findAll();
 		} catch (QueryException $queryException) {
 			FlashMessage::set('errores', [$queryException->getMessage()]);
